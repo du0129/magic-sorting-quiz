@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>霍格沃茨分院测试 | 发现你的魔法人格档案</title>
+<meta name="description" content="18道情境选择，发现你的魔法人格档案。非官方粉丝向互动测试。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0908;--bg2:#12100c;--card:rgba(22,20,16,.92);--card2:rgba(30,26,20,.88);
+  --gold:#c5a572;--gold-bright:#e8c87a;--gold-dim:#8a7350;--gold-soft:rgba(197,165,114,.15);
+  --text:#e8dcc8;--text-dim:#a09484;--text-faint:#6e665c;
+  --red:#8b1a1a;--green:#1a5c3a;--blue:#1a3a6b;--yellow:#8a6d1a;
+  --line:rgba(197,165,114,.25);--line-bright:rgba(197,165,114,.5);
+  --shadow:0 8px 32px rgba(0,0,0,.5);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif SC',Georgia,'Times New Roman',serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(197,165,114,.06) 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(139,26,26,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:1}
+.hidden{display:none!important}
+.page{display:none;min-height:100vh;position:relative;z-index:2;padding:20px}
+.page.active{display:flex;flex-direction:column;align-items:center;animation:fadeUp .6s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(197,165,114,.3)}50%{box-shadow:0 0 20px rgba(197,165,114,.6)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes barGrow{from{width:0}}
+
+/* ===== ACCESS PAGE ===== */
+.access-wrap{max-width:440px;width:100%;text-align:center;margin:auto;padding:36px 0}
+.access-card{position:relative;padding:38px 26px 32px;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+.access-card::before,.access-card::after{content:'';position:absolute;width:28px;height:28px;border:1px solid var(--gold-dim);opacity:.55}
+.access-card::before{top:8px;left:8px;border-right:none;border-bottom:none}
+.access-card::after{right:8px;bottom:8px;border-left:none;border-top:none}
+.access-sigil{width:72px;height:72px;margin:0 auto 18px;animation:float 4s ease-in-out infinite}
+.access-sigil svg{display:block;width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(197,165,114,.25))}
+.access-label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px}
+.access-title{font-size:1.55rem;color:var(--gold-bright);letter-spacing:4px;margin-bottom:10px}
+.access-subtitle{font-size:.9rem;color:var(--text-dim);margin-bottom:26px}
+.access-form{display:flex;flex-direction:column;align-items:center;gap:14px}
+.access-input{display:block;width:100%;max-width:320px;min-height:48px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:4px;color:var(--text);font-family:'Cinzel','Noto Serif SC',serif;font-size:16px;letter-spacing:2px;text-align:center;text-transform:uppercase;outline:none;transition:border-color .3s,box-shadow .3s}
+.access-input:focus{border-color:var(--gold);box-shadow:0 0 14px rgba(197,165,114,.12)}
+.access-input::placeholder{color:var(--text-faint);letter-spacing:1px;text-transform:none}
+.access-btn{width:100%;max-width:320px;min-height:48px}
+.access-error{min-height:1.5em;margin-top:14px;color:#d99a8e;font-size:.82rem;line-height:1.5}
+
+/* ===== COVER PAGE ===== */
+.cover-wrap{max-width:480px;width:100%;text-align:center;padding:40px 0;margin:auto}
+.cover-emblem{width:90px;height:90px;margin:0 auto 8px;position:relative}
+.cover-emblem svg{width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(197,165,114,.3))}
+.cover-label{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px}
+h1.cover-title{font-family:'Cinzel','Noto Serif SC',serif;font-size:2.2rem;font-weight:700;color:var(--gold-bright);letter-spacing:2px;margin-bottom:6px;text-shadow:0 0 20px rgba(197,165,114,.2)}
+h1.cover-title .cn{display:block;font-family:'Noto Serif SC',serif;font-size:1.6rem;margin-top:4px;letter-spacing:6px}
+.cover-divider{width:60%;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
+.cover-subtitle{font-size:.92rem;color:var(--text-dim);font-style:italic;line-height:1.7;margin-bottom:20px;padding:0 10px}
+.cover-intro{font-size:.85rem;color:var(--text-faint);line-height:1.6;margin-bottom:10px}
+.cover-time{font-size:.78rem;color:var(--gold-dim);letter-spacing:1px;margin-bottom:28px}
+.nickname-input{width:100%;max-width:320px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:4px;color:var(--text);font-family:inherit;font-size:.9rem;text-align:center;outline:none;margin-bottom:20px;transition:border-color .3s}
+.nickname-input:focus{border-color:var(--gold)}
+.nickname-input::placeholder{color:var(--text-faint)}
+.magic-btn{display:inline-block;padding:14px 48px;background:linear-gradient(135deg,rgba(197,165,114,.12),rgba(197,165,114,.05));border:1px solid var(--gold);border-radius:4px;color:var(--gold-bright);font-family:'Cinzel','Noto Serif SC',serif;font-size:1rem;font-weight:600;letter-spacing:2px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.magic-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(197,165,114,.15),transparent);background-size:200% 100%;animation:shimmer 3s infinite}
+.magic-btn:hover{background:linear-gradient(135deg,rgba(197,165,114,.2),rgba(197,165,114,.08));box-shadow:0 0 20px rgba(197,165,114,.3);transform:translateY(-2px)}
+.magic-btn:active{transform:translateY(0)}
+.cover-hint{font-size:.78rem;color:var(--text-faint);margin-top:14px}
+.resume-btn{display:block;margin:16px auto 0;padding:8px 24px;background:transparent;border:1px solid var(--line);border-radius:4px;color:var(--text-dim);font-family:inherit;font-size:.82rem;cursor:pointer;transition:all .3s}
+.resume-btn:hover{border-color:var(--gold-dim);color:var(--gold)}
+.disclaimer{font-size:.68rem;color:var(--text-faint);margin-top:30px;padding:0 20px;line-height:1.5;opacity:.7}
+
+/* ===== TEST PAGE ===== */
+.test-wrap{max-width:560px;width:100%;margin:auto}
+.test-header{margin-bottom:24px}
+.q-counter{font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold-dim);letter-spacing:2px;margin-bottom:10px;display:block;text-align:center}
+.progress-track{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));border-radius:2px;transition:width .5s ease;box-shadow:0 0 8px rgba(197,165,114,.3)}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:28px 24px;margin-bottom:20px;position:relative;box-shadow:var(--shadow)}
+.q-card::before,.q-card::after{content:'';position:absolute;width:20px;height:20px;border:1px solid var(--gold-dim);opacity:.4}
+.q-card::before{top:6px;left:6px;border-right:none;border-bottom:none}
+.q-card::after{bottom:6px;right:6px;border-left:none;border-top:none}
+.q-text{font-size:1.02rem;line-height:1.8;color:var(--text);margin-bottom:22px;font-weight:500}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{display:block;width:100%;text-align:left;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;color:var(--text-dim);font-family:inherit;font-size:.9rem;line-height:1.5;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.option:hover{border-color:var(--gold-dim);color:var(--text);background:rgba(197,165,114,.06)}
+.option.selected{border-color:var(--gold);color:var(--gold-bright);background:rgba(197,165,114,.1);box-shadow:0 0 12px rgba(197,165,114,.15)}
+.option .opt-label{display:inline-block;width:24px;height:24px;line-height:22px;text-align:center;border:1px solid var(--line);border-radius:50%;font-family:'Cinzel',serif;font-size:.75rem;margin-right:10px;transition:all .25s;flex-shrink:0}
+.option:hover .opt-label,.option.selected .opt-label{border-color:var(--gold);color:var(--gold)}
+.test-nav{display:flex;justify-content:flex-start;gap:12px}
+.nav-btn{padding:10px 28px;background:transparent;border:1px solid var(--line);border-radius:4px;color:var(--text-dim);font-family:inherit;font-size:.85rem;cursor:pointer;transition:all .3s}
+.nav-btn:hover{border-color:var(--gold-dim);color:var(--text)}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* ===== RESULT PAGE ===== */
+.result-wrap{max-width:600px;width:100%;margin:20px auto;padding-bottom:40px}
+.result-header{text-align:center;margin-bottom:30px}
+.result-header h2{font-family:'Cinzel','Noto Serif SC',serif;font-size:1.6rem;color:var(--gold-bright);letter-spacing:2px;margin-bottom:6px}
+.result-holder{font-size:.85rem;color:var(--text-dim);letter-spacing:1px}
+.result-section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px 20px;margin-bottom:16px;position:relative;box-shadow:var(--shadow)}
+.result-section::before,.result-section::after{content:'';position:absolute;width:16px;height:16px;border:1px solid var(--gold-dim);opacity:.3}
+.result-section::before{top:5px;left:5px;border-right:none;border-bottom:none}
+.result-section::after{bottom:5px;right:5px;border-left:none;border-top:none}
+.sec-title{font-family:'Cinzel','Noto Serif SC',serif;font-size:.78rem;color:var(--gold-dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* Main House */
+.house-main{text-align:center;padding:10px 0}
+.house-name-en{font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;letter-spacing:4px;margin-bottom:4px;line-height:1.1}
+.house-name-cn{font-size:1.3rem;letter-spacing:6px;margin-bottom:16px}
+.house-title{font-size:1rem;font-style:italic;color:var(--text);line-height:1.6;padding:12px 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 auto;max-width:400px}
+
+/* Commentary */
+.hat-commentary{font-size:.92rem;line-height:1.85;color:var(--text-dim);text-indent:2em}
+.hat-commentary::before{content:'"';font-size:2rem;color:var(--gold-dim);opacity:.3;position:absolute;top:8px;left:12px;font-family:Georgia,serif}
+
+/* Keywords */
+.keywords{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.keyword{padding:8px 18px;border:1px solid var(--line);border-radius:20px;font-size:.85rem;color:var(--gold);background:var(--gold-soft)}
+
+/* Dimension Bars */
+.dim-bars{display:flex;flex-direction:column;gap:12px}
+.dim-bar-item{display:flex;align-items:center;gap:12px}
+.dim-label{width:56px;font-size:.82rem;color:var(--text-dim);text-align:right;flex-shrink:0}
+.dim-bar-track{flex:1;height:8px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;position:relative}
+.dim-bar-fill{height:100%;border-radius:4px;transition:width 1s ease;position:relative}
+.dim-bar-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);background-size:200% 100%;animation:shimmer 2s infinite}
+.dim-value{width:36px;font-size:.78rem;color:var(--gold-dim);text-align:left;flex-shrink:0;font-family:'Cinzel',serif}
+
+/* Radar Chart */
+.radar-wrap{display:flex;justify-content:center;margin-bottom:10px}
+.radar-svg{width:100%;max-width:320px;height:auto}
+.radar-label{font-size:.7rem;fill:var(--text-dim);font-family:'Noto Serif SC',serif}
+.radar-grid{fill:none;stroke:var(--line);stroke-width:.5}
+.radar-axis{stroke:var(--line);stroke-width:.5}
+.radar-data{fill-opacity:.15;stroke-width:2}
+.radar-point{r:3}
+
+/* House Percentages */
+.house-pcts{display:flex;flex-direction:column;gap:10px}
+.house-pct-item{display:flex;align-items:center;gap:12px}
+.house-pct-name{width:80px;font-size:.82rem;color:var(--text-dim);flex-shrink:0}
+.house-pct-track{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.house-pct-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.house-pct-val{width:42px;font-size:.78rem;color:var(--gold-dim);font-family:'Cinzel',serif;text-align:left;flex-shrink:0}
+
+/* Second House */
+.second-house{text-align:center}
+.second-house .sh-name{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);letter-spacing:2px;margin-bottom:10px}
+.second-house .sh-desc{font-size:.88rem;line-height:1.7;color:var(--text-dim);font-style:italic}
+
+/* Hat Hesitation */
+.hat-hesitation{text-align:center;padding:12px;border:1px dashed var(--gold-dim);border-radius:6px;margin-bottom:16px;font-size:.85rem;color:var(--gold);font-style:italic;background:var(--gold-soft)}
+
+/* Strengths & Blind Spots */
+.strength-list,.blindspot-list{display:flex;flex-direction:column;gap:10px}
+.strength-item,.blindspot-item{font-size:.88rem;line-height:1.6;color:var(--text-dim);padding-left:18px;position:relative}
+.strength-item::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:.8rem}
+.blindspot-item::before{content:'◈';position:absolute;left:0;color:var(--gold-dim);font-size:.8rem}
+
+/* Role */
+.magical-role{text-align:center;font-size:1rem;color:var(--gold);padding:16px;border:1px solid var(--line);border-radius:6px;background:var(--gold-soft)}
+.magical-role .role-label{font-size:.75rem;color:var(--text-faint);letter-spacing:2px;display:block;margin-bottom:8px}
+
+/* Signature */
+.signature{text-align:center;padding:8px 0}
+.signature-text{font-size:1.15rem;font-style:italic;color:var(--gold-bright);line-height:1.6;font-weight:500}
+.signature-deco{width:40%;height:1px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
+
+/* Result Actions */
+.result-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:24px}
+.action-row{display:flex;gap:12px}
+
+/* ===== SHARE CARD ===== */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal.hidden{display:none}
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(4px)}
+.modal-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px}
+.share-card{width:320px;height:427px;border-radius:12px;overflow:hidden;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 24px}
+.sc-bg{position:absolute;inset:0;z-index:0}
+.sc-content{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.sc-top{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sc-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:3px;color:rgba(255,255,255,.5)}
+.sc-title{font-family:'Cinzel','Noto Serif SC',serif;font-size:.9rem;letter-spacing:2px;color:rgba(255,255,255,.8)}
+.sc-mid{display:flex;flex-direction:column;align-items:center;gap:8px}
+.sc-house-en{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;letter-spacing:3px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.sc-house-cn{font-size:1rem;letter-spacing:4px;color:rgba(255,255,255,.85)}
+.sc-second{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:1px;margin-top:4px}
+.sc-keywords{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.sc-kw{font-size:.68rem;padding:3px 10px;border:1px solid rgba(255,255,255,.25);border-radius:12px;color:rgba(255,255,255,.7)}
+.sc-bottom{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.sc-pcts{display:flex;gap:8px;justify-content:center;width:100%}
+.sc-pct-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.sc-pct-name{font-size:.58rem;color:rgba(255,255,255,.5)}
+.sc-pct-val{font-size:.72rem;font-family:'Cinzel',serif;color:rgba(255,255,255,.8)}
+.sc-sig{font-size:.72rem;font-style:italic;color:rgba(255,255,255,.6);line-height:1.4;padding:0 8px}
+.sc-nick{font-size:.75rem;color:rgba(255,255,255,.6);margin-top:4px}
+.modal-hint{font-size:.78rem;color:var(--text-dim);text-align:center}
+
+/* ===== RESPONSIVE ===== */
+@media(min-width:768px){
+  h1.cover-title{font-size:2.8rem}
+  h1.cover-title .cn{font-size:2rem}
+  .q-text{font-size:1.1rem}
+  .house-name-en{font-size:3rem}
+  .house-name-cn{font-size:1.6rem}
+  .result-header h2{font-size:2rem}
+  .share-card{width:360px;height:480px}
+}
+@media(max-width:360px){
+  .page{padding:14px}
+  .access-card{padding:32px 18px 26px}
+  .access-title{font-size:1.3rem;letter-spacing:2px}
+  h1.cover-title{font-size:1.8rem}
+  h1.cover-title .cn{font-size:1.3rem}
+  .q-text{font-size:.95rem}
+  .option{padding:12px 14px;font-size:.85rem}
+  .dim-label{width:48px;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- ===== ACCESS PAGE ===== -->
+<section id="access-page" class="page active">
+  <div class="access-wrap">
+    <div class="access-card">
+      <div class="access-sigil" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#c5a572" stroke-width="1" opacity="0.45"></circle>
+          <path d="M50 15 L57 39 L82 39 L62 54 L70 78 L50 63 L30 78 L38 54 L18 39 L43 39 Z" fill="none" stroke="#c5a572" stroke-width="1.2" opacity="0.75"></path>
+          <circle cx="50" cy="50" r="5" fill="#c5a572" opacity="0.55"></circle>
+        </svg>
+      </div>
+      <p class="access-label">Academy Admission Pass</p>
+      <h1 class="access-title">魔法学院入学凭证</h1>
+      <div class="cover-divider"></div>
+      <p class="access-subtitle">请输入你的测试提取码</p>
+      <form id="access-form" class="access-form" novalidate>
+        <input type="text" id="access-code-input" class="access-input" placeholder="输入提取码" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" aria-describedby="access-error">
+        <button type="submit" class="magic-btn access-btn">进入测试</button>
+      </form>
+      <p id="access-error" class="access-error" role="alert" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COVER PAGE ===== -->
+<section id="cover-page" class="page">
+  <div class="cover-wrap">
+    <div class="cover-emblem">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#c5a572" stroke-width="1" opacity="0.4"></circle>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#c5a572" stroke-width="0.5" opacity="0.3"></circle>
+        <path d="M50 18 L54 40 L76 42 L58 52 L64 74 L50 62 L36 74 L42 52 L24 42 L46 40 Z" fill="none" stroke="#c5a572" stroke-width="1" opacity="0.6"></path>
+        <circle cx="50" cy="50" r="3" fill="#c5a572" opacity="0.5"></circle>
+      </svg>
+    </div>
+    <p class="cover-label">Hogwarts Sorting Ceremony</p>
+    <h1 class="cover-title">HOGWARTS<span class="cn">霍格沃茨分院测试</span></h1>
+    <div class="cover-divider"></div>
+    <p class="cover-subtitle">「分院帽真正看见的，也许不是你的选择，<br>而是你最深层的本能。」</p>
+    <p class="cover-intro">18 个选择，重新认识你的勇气、野心、<br>理性、忠诚与隐藏人格。</p>
+    <p class="cover-time">预计测试时间：3–5 分钟</p>
+    <input type="text" id="nickname-input" class="nickname-input" placeholder="你的魔法世界名字 / 昵称（选填）" maxlength="20">
+    <button id="start-btn" class="magic-btn">戴上分院帽</button>
+    <p class="cover-hint">答案没有对错，请凭第一直觉选择。</p>
+    <button id="resume-btn" class="resume-btn hidden">继续上次测试</button>
+    <p class="disclaimer">本网页为非官方粉丝向互动测试，与《Harry Potter》官方及 Warner Bros. 无任何关联。<br>仅供娱乐，所有测试结果均为虚构的人格分析。</p>
+  </div>
+</section>
+
+<!-- ===== TEST PAGE ===== -->
+<section id="test-page" class="page">
+  <div class="test-wrap">
+    <div class="test-header">
+      <span id="q-counter" class="q-counter">01 / 18</span>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="q-card">
+      <p id="q-text" class="q-text"></p>
+      <div id="options" class="options"></div>
+    </div>
+    <div class="test-nav">
+      <button id="prev-btn" class="nav-btn">← 上一题</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULT PAGE ===== -->
+<section id="result-page" class="page">
+  <div id="result-wrap" class="result-wrap"></div>
+</section>
+
+<!-- ===== SHARE MODAL ===== -->
+<div id="share-modal" class="modal hidden">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <div id="share-card" class="share-card"></div>
+    <p class="modal-hint">长按截图保存你的分院档案</p>
+    <button id="close-modal-btn" class="nav-btn">关闭</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  访问提取码 — 在此数组中增加或修改有效提取码
+// ============================================================
+const ACCESS_CODES = [
+  "MAGIC0920"
+];
+const ACCESS_SESSION_KEY = "magic_sorting_quiz_access_granted";
+
+// ============================================================
+//  题目数据 — 18道情境题
+// ============================================================
+const QUESTIONS = [
+  {
+    text: "夜里，你在一条禁止进入的走廊里发现了一扇从未见过的门。门后似乎传来微弱的声音。你会……",
+    options: [
+      { text: "直接推门而入，看看里面到底发生了什么。", s: { G:2, R:1, courage:2, risk:2, independence:1 } },
+      { text: "先在门外听一会儿，分析情况再决定。", s: { R:2, S:1, strategy:2, intellect:1 } },
+      { text: "返回去找朋友一起过去，多个人多份力量。", s: { H:2, empathy:1, loyalty:1 } },
+      { text: "记下位置，先去找了解情况的人问清楚。", s: { S:2, strategy:1, intellect:1, ambition:1 } }
+    ]
+  },
+  {
+    text: "一位教授布置了一项你觉得毫无意义的规则作业。你会……",
+    options: [
+      { text: "当面质疑这个规则的合理性。", s: { G:2, courage:2, independence:1 } },
+      { text: "找出规则的漏洞，用最少精力完成它。", s: { S:2, strategy:2, ambition:1 } },
+      { text: "认真完成，也许教授有你看不见的用意。", s: { H:2, loyalty:1, empathy:1 } },
+      { text: "用自己的方式重新诠释作业，做到超出预期。", s: { R:2, intellect:2, independence:2 } }
+    ]
+  },
+  {
+    text: "你的两个好友发生了严重争执，双方都要求你站队。你会……",
+    options: [
+      { text: "直接站出来调解，不管他们愿不愿意听。", s: { G:1, courage:2, empathy:1 } },
+      { text: "分析双方真实诉求，找到对自己最有利的位置。", s: { S:2, strategy:2, ambition:1 } },
+      { text: "努力让双方坐下来谈，恢复关系最重要。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "保持距离，等他们冷静下来再说。", s: { R:1, S:1, independence:2, intellect:1 } }
+    ]
+  },
+  {
+    text: "你独自在禁林中迷路，天色渐暗，远处传来不明声响。你的第一反应是……",
+    options: [
+      { text: "朝声响方向走去，搞清楚那是什么。", s: { G:2, courage:2, risk:2 } },
+      { text: "快速回忆地图知识，规划最安全的路线。", s: { R:2, intellect:2, strategy:1 } },
+      { text: "沿着来路慢慢退回，保持冷静。", s: { H:1, empathy:1, loyalty:1 } },
+      { text: "找个隐蔽处暂避，等天亮再行动。", s: { S:2, strategy:2, independence:1 } }
+    ]
+  },
+  {
+    text: "一场重要比赛中，你发现对手有一个可以利用的弱点，但利用它有些不光彩。你会……",
+    options: [
+      { text: "不屑于利用，凭真实实力去赢。", s: { G:2, courage:2, loyalty:1 } },
+      { text: "毫不犹豫地利用，胜利才是一切。", s: { S:2, ambition:2, strategy:1 } },
+      { text: "不会利用，公平竞争才有意义。", s: { H:2, loyalty:2, empathy:1 } },
+      { text: "研究这个弱点，看能否在规则内自然地针对它。", s: { R:1, S:1, strategy:2, intellect:2 } }
+    ]
+  },
+  {
+    text: "你偶然得知一个秘密——它能帮助你的朋友，但泄露它会背叛另一个朋友的信任。你会……",
+    options: [
+      { text: "无论如何先帮那个朋友，之后再去弥补信任。", s: { G:2, courage:2, empathy:1, risk:1 } },
+      { text: "权衡利弊，选择对大局影响最小的方案。", s: { S:1, R:1, strategy:2, ambition:1 } },
+      { text: "绝不泄露秘密，但想其他办法帮朋友。", s: { H:2, loyalty:2, empathy:1 } },
+      { text: "找到一种不泄露秘密也能间接帮助朋友的方式。", s: { R:2, intellect:2, strategy:1, independence:1 } }
+    ]
+  },
+  {
+    text: "你为一件重要的事准备了很久，最终还是失败了。你会……",
+    options: [
+      { text: "立刻振作起来，准备下一次挑战。", s: { G:2, courage:2, risk:1 } },
+      { text: "复盘整个过程，找出失败的根因。", s: { R:1, S:1, strategy:2, intellect:2 } },
+      { text: "先给自己时间消化情绪，再重新出发。", s: { H:2, empathy:1, loyalty:1 } },
+      { text: "接受失败的事实，转向新的方向。", s: { S:1, R:1, independence:2, ambition:1 } }
+    ]
+  },
+  {
+    text: "一个你素来尊敬的人要求你做一件你内心认为不对的事。你会……",
+    options: [
+      { text: "直接拒绝，不管对方是谁。", s: { G:2, courage:2, independence:2 } },
+      { text: "先答应，再暗中按自己的方式处理。", s: { S:2, strategy:2, ambition:1 } },
+      { text: "委婉拒绝，尽量不伤害彼此关系。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "要求对方给出合理解释，再做决定。", s: { R:2, intellect:2, strategy:1 } }
+    ]
+  },
+  {
+    text: "你面对一个所有人都说无解的复杂谜题。你会……",
+    options: [
+      { text: "从结果倒推，大胆尝试不同方向。", s: { G:1, S:1, courage:2, risk:2 } },
+      { text: "系统性地拆解每一个条件，寻找隐藏逻辑。", s: { R:2, intellect:2, strategy:2 } },
+      { text: "找其他人讨论，集思广益。", s: { H:2, empathy:1, loyalty:1 } },
+      { text: "先放一放，等灵感来了再说。", s: { R:1, S:1, independence:2, intellect:1 } }
+    ]
+  },
+  {
+    text: "你正在忙一件重要的事，一个不太熟的同学来找你帮忙。你会……",
+    options: [
+      { text: "放下手中的事先帮他，别人的困难不能不管。", s: { G:1, H:1, courage:1, empathy:2, loyalty:1 } },
+      { text: "看他能否给你带来价值再决定。", s: { S:2, strategy:2, ambition:2 } },
+      { text: "尽量挤时间帮他，同时安排好自己的事。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "礼貌说明情况，建议他找其他人。", s: { R:1, S:1, independence:2, strategy:1 } }
+    ]
+  },
+  {
+    text: "你被赋予一项可以影响很多人命运的权力，但使用它需要承担巨大风险。你会……",
+    options: [
+      { text: "毫不犹豫地使用，该承担的我承担。", s: { G:2, courage:2, risk:2 } },
+      { text: "先评估风险与收益，找到最佳时机。", s: { S:2, strategy:2, ambition:2 } },
+      { text: "征求受影响者的意见，再做决定。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "谨慎研究权力边界，确保不误伤他人。", s: { R:2, intellect:2, strategy:1 } }
+    ]
+  },
+  {
+    text: "在一个关键时刻，你必须迅速做出重大决定，但没有足够的信息。你会……",
+    options: [
+      { text: "相信直觉，果断行动。", s: { G:2, courage:2, risk:2, independence:1 } },
+      { text: "在有限时间里快速分析利弊，选最优解。", s: { R:1, S:1, strategy:2, intellect:2 } },
+      { text: "听听身边信任的人怎么说。", s: { H:2, empathy:1, loyalty:1 } },
+      { text: "如果不是非选不可，宁可等等再说。", s: { R:2, S:1, intellect:2, independence:2 } }
+    ]
+  },
+  {
+    text: "群体讨论中，你是唯一持不同意见的人。你会……",
+    options: [
+      { text: "据理力争，坚持到底。", s: { G:2, courage:2, independence:2 } },
+      { text: "用策略引导讨论方向，不露痕迹地影响结果。", s: { S:2, strategy:2, ambition:1 } },
+      { text: "尊重多数人意见，寻找折中方案。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "不急于说服别人，把分析写下来让事实说话。", s: { R:2, intellect:2, independence:1 } }
+    ]
+  },
+  {
+    text: "你发现一个流传已久的传统其实建立在错误的基础上。你会……",
+    options: [
+      { text: "公开揭露它，真理比面子重要。", s: { G:2, courage:2, independence:1 } },
+      { text: "评估揭露的代价与收益，选择最佳策略。", s: { S:2, strategy:2, ambition:1 } },
+      { text: "考虑改变传统会伤害到谁，谨慎处理。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "深入研究错误根源，用证据说话。", s: { R:2, intellect:2, independence:1 } }
+    ]
+  },
+  {
+    text: "一个你信任的人出卖了你。你的第一反应是……",
+    options: [
+      { text: "当面质问他，要求解释。", s: { G:2, courage:2, independence:1 } },
+      { text: "表面不动声色，暗中评估局势和后续策略。", s: { S:2, strategy:2, ambition:1, independence:1 } },
+      { text: "感到受伤，但试着理解他为什么这样做。", s: { H:1, R:1, empathy:2, loyalty:1 } },
+      { text: "重新评估这段关系的价值，决定是否值得修复。", s: { S:1, R:2, strategy:1, intellect:2, independence:1 } }
+    ]
+  },
+  {
+    text: "你要学习一个全新的、难度极高的魔法领域。你会……",
+    options: [
+      { text: "直接上手实践，在失败中摸索。", s: { G:2, courage:1, risk:2 } },
+      { text: "先系统学习理论框架，再动手。", s: { R:2, intellect:2, strategy:1 } },
+      { text: "找有经验的人请教，站在前人肩膀上。", s: { H:1, S:1, empathy:1, loyalty:1 } },
+      { text: "找到这个领域最有趣的切入点，从那里深入。", s: { R:1, S:1, independence:2, intellect:2 } }
+    ]
+  },
+  {
+    text: "你必须在两件事之间选择：一件对你个人有利，一件对集体有利，且无法兼得。你会……",
+    options: [
+      { text: "选择对集体有利的，个人得失不是最重要的。", s: { H:1, G:1, empathy:2, loyalty:2 } },
+      { text: "选择对自己有利的，只有自己强大了才能帮更多人。", s: { S:2, ambition:2, independence:1 } },
+      { text: "试图找到兼顾两者的方案，即便更辛苦。", s: { H:2, empathy:2, loyalty:1 } },
+      { text: "仔细分析哪种选择的长期价值更高，再做决定。", s: { R:1, S:1, strategy:2, intellect:2 } }
+    ]
+  },
+  {
+    text: "如果分院帽给了你选择的机会，你心底最真实的声音是……",
+    options: [
+      { text: "让我去能证明自己价值的地方。", s: { G:2, courage:2, ambition:1, risk:1 } },
+      { text: "让我去能让我变得最强的地方。", s: { S:2, ambition:2, strategy:1, independence:1 } },
+      { text: "让我去能让我被理解的地方。", s: { R:2, intellect:2, independence:2 } },
+      { text: "让我去能让我找到真正归属的地方。", s: { H:2, empathy:2, loyalty:2 } }
+    ]
+  }
+];
+
+// ============================================================
+//  学院数据
+// ============================================================
+const HOUSES = {
+  G: {
+    nameEn: "GRYFFINDOR", nameCn: "格兰芬多",
+    color: "#c0392b", colorLight: "#e74c3c", accent: "#d4a017",
+    gradient: "linear-gradient(135deg,#6b1a1a,#3a0e0e)",
+    titles: [
+      { dim:"courage", text:"在恐惧面前仍然前行的人。" },
+      { dim:"risk", text:"把危险当呼吸一样自然的人。" },
+      { dim:"independence", text:"不需要别人先站出来，你习惯自己先迈步。" },
+      { dim:"empathy", text:"你的勇敢从不为自己，而是为你在乎的人。" },
+      { dim:"loyalty", text:"你守护的，是你愿意用一切去捍卫的东西。" }
+    ],
+    strengths: [
+      { dim:"courage", text:"在混乱中快速做出判断并行动的能力" },
+      { dim:"empathy", text:"面对不公时不会沉默的正义感" },
+      { dim:"risk", text:"在别人退缩时第一个站出来的勇气" },
+      { dim:"loyalty", text:"对信念的坚定和不轻易动摇" },
+      { dim:"empathy", text:"保护弱者的本能反应" }
+    ],
+    blindSpots: [
+      { dim:"risk", text:"你有时会把「勇敢」和「冲动」混淆，行动快于思考。" },
+      { dim:"courage", text:"你容易因为信念而忽视风险，忘记不是所有代价都值得付出。" },
+      { dim:"independence", text:"你习惯独自承担，却忘了让身边的人也有参与的机会。" }
+    ],
+    roles: [
+      { dim:"courage", text:"学院魁地奇队核心球员" },
+      { dim:"risk", text:"守护禁林的巡逻队员" },
+      { dim:"courage", text:"危急时刻第一个站出来的人" },
+      { dim:"empathy", text:"正义社团的发起者" },
+      { dim:"independence", text:"魔法世界的不安定因素——以最好的方式" }
+    ],
+    signatures: [
+      { dim:"courage", text:"我不是不怕，我只是不让恐惧替我做决定。" },
+      { dim:"risk", text:"该站出来的时候，我从不缺席。" },
+      { dim:"independence", text:"有些事总要有人先做，那就我来。" },
+      { dim:"loyalty", text:"我的勇气不是没有恐惧，而是带着恐惧前行。" },
+      { dim:"empathy", text:"正义不是等来的，是我站出来的那一刻才开始的。" }
+    ]
+  },
+  S: {
+    nameEn: "SLYTHERIN", nameCn: "斯莱特林",
+    color: "#27ae60", colorLight: "#2ecc71", accent: "#95a5a6",
+    gradient: "linear-gradient(135deg,#1a5c3a,#0a3a1e)",
+    titles: [
+      { dim:"ambition", text:"你从不把目标说出口，但你从未忘记它。" },
+      { dim:"strategy", text:"在你开口之前，棋局已经在脑中下完了一半。" },
+      { dim:"independence", text:"你不需要人群来确认自己的方向。" },
+      { dim:"intellect", text:"你读懂局势的速度，比大多数人读懂情绪还快。" },
+      { dim:"courage", text:"你敢于做出不受欢迎但正确的决定。" }
+    ],
+    strengths: [
+      { dim:"strategy", text:"在复杂环境中快速识别关键变量和隐藏关系的能力" },
+      { dim:"ambition", text:"对长期目标的专注力，不被短期情绪干扰" },
+      { dim:"strategy", text:"精确判断什么时候该进、什么时候该退的局势感" },
+      { dim:"ambition", text:"整合资源、人脉和信息的天赋" },
+      { dim:"strategy", text:"在压力下保持冷静并做出最优选择的能力" }
+    ],
+    blindSpots: [
+      { dim:"independence", text:"你有时会把「谨慎」变成「不信任」，让身边人感到距离。" },
+      { dim:"strategy", text:"你习惯计算利弊，但有些关系不能用性价比来衡量。" },
+      { dim:"ambition", text:"你的控制欲在不知不觉中，可能变成对别人的压迫。" }
+    ],
+    roles: [
+      { dim:"strategy", text:"魔法部战略部门核心成员" },
+      { dim:"strategy", text:"地下秘密社团的组织者" },
+      { dim:"ambition", text:"权力棋局中冷静的棋手" },
+      { dim:"strategy", text:"资源整合与情报网络的控制者" },
+      { dim:"ambition", text:"魔法世界规则背后的真正制定者" }
+    ],
+    signatures: [
+      { dim:"ambition", text:"真正重要的选择，我从不交给运气。" },
+      { dim:"strategy", text:"我不需要被喜欢，我需要被认真对待。" },
+      { dim:"strategy", text:"棋局在落子之前就已经赢了一半。" },
+      { dim:"independence", text:"你以为的偶然，都是我的必然。" },
+      { dim:"ambition", text:"我不追逐权力，我只是不让权力远离我。" }
+    ]
+  },
+  R: {
+    nameEn: "RAVENCLAW", nameCn: "拉文克劳",
+    color: "#2980b9", colorLight: "#3498db", accent: "#b8860b",
+    gradient: "linear-gradient(135deg,#1a3a6b,#0a1a3e)",
+    titles: [
+      { dim:"intellect", text:"观察世界的人，也在悄悄重构世界。" },
+      { dim:"independence", text:"你的思想从不借别人的翅膀飞行。" },
+      { dim:"strategy", text:"你看到的不是眼前的棋，而是三步之后的局面。" },
+      { dim:"risk", text:"未知不是恐惧，而是你最想打开的那扇门。" },
+      { dim:"intellect", text:"你理解世界的方式，是先理解它的每一层结构。" }
+    ],
+    strengths: [
+      { dim:"intellect", text:"复杂环境中的模式识别能力" },
+      { dim:"independence", text:"不被群体意见轻易影响的独立判断力" },
+      { dim:"intellect", text:"在真正重要的问题上保持长期专注的能力" },
+      { dim:"intellect", text:"从信息中发现别人看不到的关联的天赋" },
+      { dim:"independence", text:"用全新的视角重新定义问题的创造力" }
+    ],
+    blindSpots: [
+      { dim:"intellect", text:"你有时会把「再想清楚一点」当作延迟行动的理由。" },
+      { dim:"independence", text:"你容易沉浸在自己的思维世界里，忘记回应身边人的情感需求。" },
+      { dim:"intellect", text:"你的完美主义有时候不是在追求更好，而是在逃避「足够好」。" }
+    ],
+    roles: [
+      { dim:"intellect", text:"禁书区的常客" },
+      { dim:"intellect", text:"魔法理论的研究者" },
+      { dim:"independence", text:"霍格沃茨图书馆的深夜访客" },
+      { dim:"intellect", text:"未知魔法领域的探索者" },
+      { dim:"independence", text:"用知识改变规则的那个人" }
+    ],
+    signatures: [
+      { dim:"intellect", text:"我不是在寻找答案，我只是很难停止追问。" },
+      { dim:"intellect", text:"理解一件事的乐趣，胜过拥有一千件东西。" },
+      { dim:"independence", text:"我看见的不只是世界，还有世界背后的结构。" },
+      { dim:"intellect", text:"真正的魔法不在魔杖里，在思维里。" },
+      { dim:"independence", text:"我不是不合群，我只是在想更重要的事。" }
+    ]
+  },
+  H: {
+    nameEn: "HUFFLEPUFF", nameCn: "赫奇帕奇",
+    color: "#d4a017", colorLight: "#f1c40f", accent: "#e67e22",
+    gradient: "linear-gradient(135deg,#8a6d1a,#4a3a0e)",
+    titles: [
+      { dim:"empathy", text:"你的温柔是你最坚硬的铠甲。" },
+      { dim:"loyalty", text:"你不需要被看见，但所有被你善待的人都记得你。" },
+      { dim:"courage", text:"你的勇敢很安静，但从未缺席。" },
+      { dim:"independence", text:"你不需要证明自己与众不同，你只是认真地做自己。" },
+      { dim:"strategy", text:"你最大的策略，是让所有人低估你的策略。" }
+    ],
+    strengths: [
+      { dim:"empathy", text:"在冲突中让所有人感到被听见的共情天赋" },
+      { dim:"loyalty", text:"不因短期利益动摇的长期关系经营能力" },
+      { dim:"loyalty", text:"在别人放弃后仍然坚持的耐心和稳定性" },
+      { dim:"empathy", text:"让团队中每个人都发挥最大价值的能力" },
+      { dim:"empathy", text:"在复杂人际中维持信任和公平的天赋" }
+    ],
+    blindSpots: [
+      { dim:"empathy", text:"你太不喜欢冲突，有时候会让问题在被回避中变得更严重。" },
+      { dim:"loyalty", text:"你容易承担过多，忘了自己的需求同样重要。" },
+      { dim:"empathy", text:"你在面对竞争时不愿伤害别人，但有时竞争不是伤害。" }
+    ],
+    roles: [
+      { dim:"empathy", text:"神奇动物的守护者和观察者" },
+      { dim:"loyalty", text:"学院中最值得信赖的人" },
+      { dim:"empathy", text:"魔法世界中温暖的治愈者" },
+      { dim:"loyalty", text:"默默维系整个学院运转的人" },
+      { dim:"empathy", text:"所有秘密花园的守护者" }
+    ],
+    signatures: [
+      { dim:"loyalty", text:"被信任，是我最珍视的勋章。" },
+      { dim:"loyalty", text:"我不需要赢过谁，我只需要对得起自己照顾的人。" },
+      { dim:"empathy", text:"温柔不是软弱，是我选择的方式。" },
+      { dim:"loyalty", text:"真正的忠诚，是在所有人离开后还在的那一个。" },
+      { dim:"empathy", text:"我的力量不在声音里，在坚持里。" }
+    ]
+  }
+};
+
+// ============================================================
+//  第二学院组合文案
+// ============================================================
+const SECOND_HOUSE_TEXTS = {
+  "G-S": "这意味着在你热烈的外表下，藏着一种冷静的计算——你知道什么时候该收，什么时候该放。",
+  "G-R": "这意味着你的勇敢从不盲目，每一步行动背后都有精密的判断在支撑。",
+  "G-H": "这意味着你的勇气从不为自己而用，你最先想到的总是你在乎的人。",
+  "S-G": "这意味着你的野心背后有一团不灭的火——你不只是想赢，你想配得上你想要的东西。",
+  "S-R": "这意味着在真正重要的目标面前，你并不像表面看起来那么随性。",
+  "S-H": "这意味着你懂得利用关系，但你从不轻易背叛信任——你知道信任是最稀缺的资源。",
+  "R-G": "这意味着你不仅敢想，还敢做。当理论需要有人验证时，你不介意做那个人。",
+  "R-S": "这意味着你的野心被理性精确校准，从不在没有把握的方向上浪费一颗子弹。",
+  "R-H": "这意味着你的温柔里有理性的底色——你善待别人，不是因为软弱，而是因为你想清楚了。",
+  "H-G": "这意味着沉默不代表怯懦，在真正关键的时刻，你从不缺席。",
+  "H-S": "这意味着你最大的策略，就是让所有人忽略你的策略。",
+  "H-R": "这意味着你的善良从不盲目——你选择温柔，是因为你比谁都看清楚了全貌。"
+};
+
+// ============================================================
+//  人格维度数据
+// ============================================================
+const DIMENSIONS = {
+  courage:    { name:"勇气",   kw:"勇敢果决" },
+  ambition:   { name:"野心",   kw:"目标驱动" },
+  intellect:  { name:"理性",   kw:"理性洞察" },
+  loyalty:    { name:"忠诚",   kw:"忠诚可靠" },
+  risk:       { name:"冒险",   kw:"冒险精神" },
+  strategy:   { name:"策略",   kw:"策略思维" },
+  empathy:    { name:"共情",   kw:"高共情力" },
+  independence:{ name:"独立性", kw:"独立自主" }
+};
+const DIM_KEYS = Object.keys(DIMENSIONS);
+const HOUSE_KEYS = ["G","S","R","H"];
+
+// 分院帽评语模板
+const COMMENTARY_BASE = {
+  G: "你不是那种会在安全地带等待的人。当大多数人还在权衡利弊时，你已经迈出了第一步。你的第一反应往往不是「该不该」，而是「现在就去」。",
+  S: "你很少把真正的意图说出口。比起被理解，你更在意事情是否按照该有的方向发展。你习惯在开口之前，先把所有人的位置和动机计算清楚。",
+  R: "你并不急于成为人群中第一个行动的人。比起立即表态，你更习惯先观察规则、人物和隐藏的因果关系。你的思考速度比行动快，这让你常常在别人做决定时，已经看到了三种可能的结果。",
+  H: "你不靠声量证明自己的存在。在每一个你在乎的人需要你的时候，你从未缺席。你的力量不在锋芒，而在那种日复一日、不需要任何人看见的坚持。"
+};
+const COMMENTARY_DIM = {
+  courage: "面对未知和危险，你的本能不是退缩，而是迎上去——这种反应不是冲动，而是你身体里某种根深蒂固的信念。",
+  ambition: "你的目标感从不写在脸上，但它驱动着你几乎每一个重要选择。你知道自己想要什么，而且你比大多数人更能等待。",
+  intellect: "你的好奇心不是浅尝辄止的那种，你习惯追问到问题的根部。理解一个事物的运作方式，对你来说比拥有它更有吸引力。",
+  loyalty: "你对关系的投入是长期的、安静的。你不会因为短期利益放弃一个人，这种可靠性让你成为少数人生命中的「安全锚」。",
+  risk: "你对不确定性有一种天然的亲近感。当别人因为未知而犹豫时，未知反而是你最好的燃料。",
+  strategy: "你习惯在行动之前先布局。你看到的不是眼前的这一步，而是三步之后的局面。",
+  empathy: "你有一种几乎本能的共情力——你能在别人开口之前就读懂他们的情绪。这不是技巧，是你感知世界的方式。",
+  independence: "你的判断从不轻易被群体的声音覆盖。你不需要别人的认同来确认自己的方向。"
+};
+const COMMENTARY_BOTTOM = {
+  courage: "只是有时候，你会因为过度权衡而错过最佳的行动时机。",
+  ambition: "只是有时候，你不缺能力，却忘了为自己争取应得的东西。",
+  intellect: "只是有时候，过快地依赖直觉而不是分析，会让你错过更优的答案。",
+  loyalty: "只是有时候，你太专注于向前走，会忘了回头维护那些一直在你身后的人。",
+  risk: "只是有时候，你对风险的敏感度让你避开很多陷阱，但也让你错过了值得冒险的机会。",
+  strategy: "只是有时候，你习惯凭直觉和热情行动，但多一步规划能让你的努力事半功倍。",
+  empathy: "只是有时候，你专注于效率和结果，但会忽略身边人的情绪信号。",
+  independence: "只是有时候，你太在乎别人的看法，这会让你在做重要选择时犹豫不决。"
+};
+
+// ============================================================
+//  状态管理
+// ============================================================
+let state = {
+  page: "cover",
+  qIndex: 0,
+  answers: new Array(18).fill(null),
+  nickname: "",
+  scores: null,
+  result: null
+};
+const STORAGE_KEY = "hogwarts_sorting_test_v1";
+
+// ============================================================
+//  计分逻辑
+// ============================================================
+function calculateScores(answers) {
+  const scores = { G:0, S:0, R:0, H:0 };
+  DIM_KEYS.forEach(d => scores[d] = 0);
+  answers.forEach((ans, i) => {
+    if (ans === null) return;
+    const opt = QUESTIONS[i].options[ans];
+    if (!opt || !opt.s) return;
+    for (const key in opt.s) {
+      scores[key] = (scores[key] || 0) + opt.s[key];
+    }
+  });
+  return scores;
+}
+
+function calculateMaxScores() {
+  const max = { G:0, S:0, R:0, H:0 };
+  DIM_KEYS.forEach(d => max[d] = 0);
+  QUESTIONS.forEach(q => {
+    HOUSE_KEYS.forEach(h => {
+      let m = 0;
+      q.options.forEach(o => { if (o.s && o.s[h]) m = Math.max(m, o.s[h]); });
+      max[h] += m;
+    });
+    DIM_KEYS.forEach(d => {
+      let m = 0;
+      q.options.forEach(o => { if (o.s && o.s[d]) m = Math.max(m, o.s[d]); });
+      max[d] += m;
+    });
+  });
+  return max;
+}
+const MAX_SCORES = calculateMaxScores();
+
+function generateResult(scores) {
+  // 学院排名
+  const houseScores = HOUSE_KEYS.map(h => ({ house:h, score:scores[h] }));
+  houseScores.sort((a,b) => b.score - a.score);
+  const main = houseScores[0].house;
+  const second = houseScores[1].house;
+  const total = houseScores.reduce((s,h) => s + h.score, 0) || 1;
+  const percentages = {};
+  houseScores.forEach(h => { percentages[h.house] = Math.round(h.score / total * 100); });
+  
+  // 分院帽犹豫
+  const hesitation = (houseScores[0].score - houseScores[1].score) <= 3;
+  
+  // 维度排名
+  const dimScores = DIM_KEYS.map(d => ({ dim:d, score:scores[d] }));
+  dimScores.sort((a,b) => b.score - a.score);
+  const topDims = dimScores.slice(0, 3).map(d => d.dim);
+  const top2 = dimScores.slice(0, 2).map(d => d.dim);
+  const bottomDim = dimScores[dimScores.length - 1].dim;
+  
+  // 维度百分比
+  const dimPcts = {};
+  DIM_KEYS.forEach(d => {
+    dimPcts[d] = Math.round(scores[d] / (MAX_SCORES[d] || 1) * 100);
+  });
+  
+  // 选标题
+  const house = HOUSES[main];
+  let title = house.titles[0].text;
+  const matchedTitle = house.titles.find(t => t.dim === topDims[0]);
+  if (matchedTitle) title = matchedTitle.text;
+  
+  // 选签名
+  let signature = house.signatures[0].text;
+  const matchedSig = house.signatures.find(s => s.dim === topDims[0]);
+  if (matchedSig) signature = matchedSig.text;
+  
+  // 选角色
+  let role = house.roles[0].text;
+  const matchedRole = house.roles.find(r => r.dim === topDims[0]);
+  if (matchedRole) role = matchedRole.text;
+  
+  // 选优势 (2-3条)
+  let strengths = [];
+  topDims.forEach(td => {
+    const match = house.strengths.find(st => st.dim === td);
+    if (match && !strengths.includes(match.text)) strengths.push(match.text);
+  });
+  while (strengths.length < 3) {
+    const remaining = house.strengths.filter(st => !strengths.includes(st.text));
+    if (remaining.length === 0) break;
+    strengths.push(remaining[0].text);
+  }
+  
+  // 选盲区 (2条)
+  let blindSpots = [];
+  const matchedBS = house.blindSpots.find(bs => bs.dim === bottomDim);
+  if (matchedBS) blindSpots.push(matchedBS.text);
+  const remainingBS = house.blindSpots.filter(bs => !blindSpots.includes(bs.text));
+  blindSpots.push(remainingBS[0].text);
+  
+  // 关键词
+  const keywords = top2.map(d => DIMENSIONS[d].kw);
+  
+  // 第二学院文案
+  const secondKey = main + "-" + second;
+  const secondText = SECOND_HOUSE_TEXTS[secondKey] || "";
+  
+  // 分院帽评语
+  let commentary = COMMENTARY_BASE[main];
+  commentary += COMMENTARY_DIM[topDims[0]] || "";
+  if (topDims[1] && COMMENTARY_DIM[topDims[1]]) {
+    commentary += COMMENTARY_DIM[topDims[1]];
+  }
+  commentary += COMMENTARY_BOTTOM[bottomDim] || "";
+  
+  return {
+    main, second, house, percentages, hesitation,
+    topDims, top2, bottomDim, dimPcts,
+    title, signature, role, strengths, blindSpots,
+    keywords, secondText, commentary, scores
+  };
+}
+
+// ============================================================
+//  UI 渲染
+// ============================================================
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(pageId + "-page").classList.add("active");
+  state.page = pageId;
+  window.scrollTo(0, 0);
+}
+
+function hasAccess() {
+  try {
+    return sessionStorage.getItem(ACCESS_SESSION_KEY) === "true";
+  } catch(e) {
+    return false;
+  }
+}
+
+function submitAccessCode() {
+  const input = document.getElementById("access-code-input");
+  const error = document.getElementById("access-error");
+  const code = input.value.trim();
+
+  if (!code) {
+    error.textContent = "请输入提取码。";
+    input.focus();
+    return;
+  }
+
+  const normalizedCode = code.toUpperCase();
+  const isValid = ACCESS_CODES.some(function(validCode) {
+    return validCode.trim().toUpperCase() === normalizedCode;
+  });
+
+  if (!isValid) {
+    error.textContent = "提取码无效，请重新确认。";
+    input.select();
+    return;
+  }
+
+  try {
+    sessionStorage.setItem(ACCESS_SESSION_KEY, "true");
+  } catch(e) {}
+  error.textContent = "";
+  showPage("cover");
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[state.qIndex];
+  document.getElementById("q-counter").textContent =
+    String(state.qIndex + 1).padStart(2,"0") + " / 18";
+  document.getElementById("progress-fill").style.width =
+    ((state.qIndex) / 18 * 100) + "%";
+  document.getElementById("q-text").textContent = q.text;
+  const optsContainer = document.getElementById("options");
+  optsContainer.innerHTML = "";
+  const labels = ["A","B","C","D"];
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    if (state.answers[state.qIndex] === i) btn.classList.add("selected");
+    btn.innerHTML = '<span class="opt-label">' + labels[i] + '</span>' + opt.text;
+    btn.onclick = function() { selectOption(i); };
+    optsContainer.appendChild(btn);
+  });
+  document.getElementById("prev-btn").style.visibility =
+    state.qIndex > 0 ? "visible" : "hidden";
+}
+
+function selectOption(index) {
+  state.answers[state.qIndex] = index;
+  saveState();
+  // 视觉反馈
+  const opts = document.querySelectorAll(".option");
+  opts.forEach((o, i) => o.classList.toggle("selected", i === index));
+  // 延迟进入下一题
+  setTimeout(function() {
+    if (state.qIndex < 17) {
+      state.qIndex++;
+      renderQuestion();
+      saveState();
+    } else {
+      // 完成
+      state.scores = calculateScores(state.answers);
+      state.result = generateResult(state.scores);
+      saveState();
+      renderResult();
+      showPage("result");
+    }
+  }, 350);
+}
+
+function prevQuestion() {
+  if (state.qIndex > 0) {
+    state.qIndex--;
+    renderQuestion();
+    saveState();
+  }
+}
+
+function renderResult() {
+  const r = state.result;
+  const nick = state.nickname || "神秘的巫师";
+  const h = r.house;
+  const wrap = document.getElementById("result-wrap");
+  
+  let html = '';
+  
+  // Header
+  html += '<div class="result-header">';
+  html += '<h2>你的魔法人格档案</h2>';
+  html += '<p class="result-holder">档案持有人：' + escapeHtml(nick) + '</p>';
+  html += '</div>';
+  
+  // Hat hesitation
+  if (r.hesitation) {
+    html += '<div class="hat-hesitation">分院帽曾在 ' + h.nameCn + ' 与 ' + HOUSES[r.second].nameCn + ' 之间犹豫了很久。</div>';
+  }
+  
+  // 1. Main House
+  html += '<div class="result-section">';
+  html += '<div class="house-main">';
+  html += '<div class="house-name-en" style="color:' + h.colorLight + '">' + h.nameEn + '</div>';
+  html += '<div class="house-name-cn" style="color:' + h.accent + '">' + h.nameCn + '</div>';
+  html += '<div class="house-title">「' + r.title + '」</div>';
+  html += '</div>';
+  html += '</div>';
+  
+  // 2. Commentary
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">分院帽评语</div>';
+  html += '<p class="hat-commentary">' + r.commentary + '</p>';
+  html += '</div>';
+  
+  // 3. Keywords
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">你的核心人格</div>';
+  html += '<div class="keywords">';
+  r.keywords.forEach(function(kw) {
+    html += '<span class="keyword">' + kw + '</span>';
+  });
+  html += '</div>';
+  html += '</div>';
+  
+  // 4. Dimension Bars
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">魔法人格维度</div>';
+  html += '<div class="radar-wrap">' + buildRadarChart(r.dimPcts, h) + '</div>';
+  html += '<div class="dim-bars">';
+  DIM_KEYS.forEach(function(d) {
+    const pct = r.dimPcts[d];
+    html += '<div class="dim-bar-item">';
+    html += '<span class="dim-label">' + DIMENSIONS[d].name + '</span>';
+    html += '<div class="dim-bar-track"><div class="dim-bar-fill" style="width:' + pct + '%;background:linear-gradient(90deg,' + h.color + ',' + h.colorLight + ')"></div></div>';
+    html += '<span class="dim-value">' + pct + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+  
+  // 5. House Percentages
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">学院比例</div>';
+  html += '<div class="house-pcts">';
+  HOUSE_KEYS.forEach(function(hk) {
+    const pct = r.percentages[hk];
+    const hd = HOUSES[hk];
+    html += '<div class="house-pct-item">';
+    html += '<span class="house-pct-name">' + hd.nameCn + '</span>';
+    html += '<div class="house-pct-track"><div class="house-pct-fill" style="width:' + pct + '%;background:linear-gradient(90deg,' + hd.color + ',' + hd.colorLight + ')"></div></div>';
+    html += '<span class="house-pct-val">' + pct + '%</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+  
+  // 6. Second House
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">你的第二学院</div>';
+  html += '<div class="second-house">';
+  html += '<div class="sh-name" style="color:' + HOUSES[r.second].colorLight + '">' + HOUSES[r.second].nameEn + ' · ' + HOUSES[r.second].nameCn + '</div>';
+  html += '<p class="sh-desc">' + r.secondText + '</p>';
+  html += '</div>';
+  html += '</div>';
+  
+  // 7. Hidden Strengths
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">你的隐藏优势</div>';
+  html += '<div class="strength-list">';
+  r.strengths.forEach(function(s) {
+    html += '<div class="strength-item">' + s + '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+  
+  // 8. Blind Spots
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">分院帽的提醒</div>';
+  html += '<div class="blindspot-list">';
+  r.blindSpots.forEach(function(bs) {
+    html += '<div class="blindspot-item">' + bs + '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+  
+  // 9. Magical Role
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">如果你生活在魔法世界</div>';
+  html += '<div class="magical-role">';
+  html += '<span class="role-label">YOUR MAGICAL IDENTITY</span>';
+  html += '<div style="font-size:1.1rem;font-weight:600;color:' + h.colorLight + '">' + r.role + '</div>';
+  html += '</div>';
+  html += '</div>';
+  
+  // 10. Signature
+  html += '<div class="result-section">';
+  html += '<div class="sec-title">一句话人格签名</div>';
+  html += '<div class="signature">';
+  html += '<p class="signature-text">「' + r.signature + '」</p>';
+  html += '<div class="signature-deco"></div>';
+  html += '</div>';
+  html += '</div>';
+  
+  // Actions
+  html += '<div class="result-actions">';
+  html += '<button class="magic-btn" id="share-btn">生成我的分院档案</button>';
+  html += '<div class="action-row">';
+  html += '<button class="nav-btn" id="retry-btn">重新测试</button>';
+  html += '<button class="nav-btn" id="home-btn">回到首页</button>';
+  html += '</div>';
+  html += '</div>';
+  
+  wrap.innerHTML = html;
+  
+  // 事件绑定
+  document.getElementById("share-btn").onclick = function() { showShareCard(); };
+  document.getElementById("retry-btn").onclick = function() { resetTest(); };
+  document.getElementById("home-btn").onclick = function() { goHome(); };
+  
+  // 动画触发进度条
+  setTimeout(function() {
+    document.querySelectorAll(".dim-bar-fill").forEach(function(el) {
+      const w = el.style.width;
+      el.style.width = "0";
+      requestAnimationFrame(function() {
+        el.style.width = w;
+      });
+    });
+    document.querySelectorAll(".house-pct-fill").forEach(function(el) {
+      const w = el.style.width;
+      el.style.width = "0";
+      requestAnimationFrame(function() {
+        el.style.width = w;
+      });
+    });
+  }, 100);
+}
+
+function buildRadarChart(dimPcts, house) {
+  var cx = 160, cy = 160, R = 110;
+  var n = DIM_KEYS.length;
+  var pts = [];
+  var gridPts25 = [], gridPts50 = [], gridPts75 = [], gridPts100 = [];
+  
+  for (var i = 0; i < n; i++) {
+    var angle = -Math.PI / 2 + i * (2 * Math.PI / n);
+    var val = (dimPcts[DIM_KEYS[i]] || 0) / 100;
+    var x = cx + Math.cos(angle) * R * val;
+    var y = cy + Math.sin(angle) * R * val;
+    pts.push(x + "," + y);
+    
+    var x25 = cx + Math.cos(angle) * R * 0.25;
+    var y25 = cy + Math.sin(angle) * R * 0.25;
+    gridPts25.push(x25 + "," + y25);
+    var x50 = cx + Math.cos(angle) * R * 0.5;
+    var y50 = cy + Math.sin(angle) * R * 0.5;
+    gridPts50.push(x50 + "," + y50);
+    var x75 = cx + Math.cos(angle) * R * 0.75;
+    var y75 = cy + Math.sin(angle) * R * 0.75;
+    gridPts75.push(x75 + "," + y75);
+    var x100 = cx + Math.cos(angle) * R;
+    var y100 = cy + Math.sin(angle) * R;
+    gridPts100.push(x100 + "," + y100);
+  }
+  
+  var svg = '<svg class="radar-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">';
+  // Grid
+  svg += '<polygon class="radar-grid" points="' + gridPts100.join(" ") + '" opacity="0.5"/>';
+  svg += '<polygon class="radar-grid" points="' + gridPts75.join(" ") + '" opacity="0.4"/>';
+  svg += '<polygon class="radar-grid" points="' + gridPts50.join(" ") + '" opacity="0.3"/>';
+  svg += '<polygon class="radar-grid" points="' + gridPts25.join(" ") + '" opacity="0.2"/>';
+  // Axes
+  for (var i = 0; i < n; i++) {
+    var angle = -Math.PI / 2 + i * (2 * Math.PI / n);
+    var x100 = cx + Math.cos(angle) * R;
+    var y100 = cy + Math.sin(angle) * R;
+    svg += '<line class="radar-axis" x1="' + cx + '" y1="' + cy + '" x2="' + x100 + '" y2="' + y100 + '"/>';
+  }
+  // Data
+  svg += '<polygon class="radar-data" points="' + pts.join(" ") + '" fill="' + house.color + '" stroke="' + house.colorLight + '"/>';
+  // Points
+  for (var i = 0; i < n; i++) {
+    var angle = -Math.PI / 2 + i * (2 * Math.PI / n);
+    var val = (dimPcts[DIM_KEYS[i]] || 0) / 100;
+    var x = cx + Math.cos(angle) * R * val;
+    var y = cy + Math.sin(angle) * R * val;
+    svg += '<circle cx="' + x + '" cy="' + y + '" r="3" fill="' + house.colorLight + '"/>';
+  }
+  // Labels
+  for (var i = 0; i < n; i++) {
+    var angle = -Math.PI / 2 + i * (2 * Math.PI / n);
+    var lx = cx + Math.cos(angle) * (R + 18);
+    var ly = cy + Math.sin(angle) * (R + 18) + 4;
+    svg += '<text class="radar-label" x="' + lx + '" y="' + ly + '" text-anchor="middle">' + DIMENSIONS[DIM_KEYS[i]].name + '</text>';
+  }
+  svg += '</svg>';
+  return svg;
+}
+
+// ============================================================
+//  分享卡片
+// ============================================================
+function showShareCard() {
+  var r = state.result;
+  var nick = state.nickname || "神秘的巫师";
+  var h = r.house;
+  var sh = HOUSES[r.second];
+  var card = document.getElementById("share-card");
+  
+  var html = '';
+  html += '<div class="sc-bg" style="background:' + h.gradient + '"></div>';
+  html += '<div class="sc-content">';
+  // Top
+  html += '<div class="sc-top">';
+  html += '<div class="sc-label">HOGWARTS SORTING TEST</div>';
+  html += '<div class="sc-title">霍格沃茨分院测试</div>';
+  html += '</div>';
+  // Mid
+  html += '<div class="sc-mid">';
+  html += '<div class="sc-house-en">' + h.nameEn + '</div>';
+  html += '<div class="sc-house-cn">' + h.nameCn + '</div>';
+  html += '<div class="sc-second">第二学院 · ' + sh.nameCn + '</div>';
+  html += '<div class="sc-keywords">';
+  r.keywords.forEach(function(kw) {
+    html += '<span class="sc-kw">' + kw + '</span>';
+  });
+  html += '</div>';
+  html += '</div>';
+  // Bottom
+  html += '<div class="sc-bottom">';
+  html += '<div class="sc-pcts">';
+  HOUSE_KEYS.forEach(function(hk) {
+    html += '<div class="sc-pct-item">';
+    html += '<span class="sc-pct-name">' + HOUSES[hk].nameCn + '</span>';
+    html += '<span class="sc-pct-val">' + r.percentages[hk] + '%</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div class="sc-sig">「' + r.signature + '」</div>';
+  html += '<div class="sc-nick">— ' + escapeHtml(nick) + '</div>';
+  html += '</div>';
+  html += '</div>';
+  
+  card.innerHTML = html;
+  document.getElementById("share-modal").classList.remove("hidden");
+}
+
+function closeShareCard() {
+  document.getElementById("share-modal").classList.add("hidden");
+}
+
+// ============================================================
+//  导航操作
+// ============================================================
+function startTest() {
+  state.nickname = document.getElementById("nickname-input").value.trim();
+  state.qIndex = 0;
+  state.answers = new Array(18).fill(null);
+  state.scores = null;
+  state.result = null;
+  saveState();
+  renderQuestion();
+  showPage("test");
+}
+
+function resetTest() {
+  state.qIndex = 0;
+  state.answers = new Array(18).fill(null);
+  state.scores = null;
+  state.result = null;
+  saveState();
+  renderQuestion();
+  showPage("test");
+}
+
+function goHome() {
+  showPage("cover");
+  checkResume();
+}
+
+// ============================================================
+//  localStorage
+// ============================================================
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      qIndex: state.qIndex,
+      answers: state.answers,
+      nickname: state.nickname,
+      result: state.result
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch(e) { return null; }
+}
+
+function checkResume() {
+  var saved = loadState();
+  var btn = document.getElementById("resume-btn");
+  if (saved && saved.answers && saved.answers.some(function(a) { return a !== null; })) {
+    btn.classList.remove("hidden");
+    btn.onclick = function() {
+      state.qIndex = saved.qIndex || 0;
+      state.answers = saved.answers || new Array(18).fill(null);
+      state.nickname = saved.nickname || "";
+      if (saved.nickname) document.getElementById("nickname-input").value = saved.nickname;
+      renderQuestion();
+      showPage("test");
+    };
+  } else {
+    btn.classList.add("hidden");
+  }
+  
+  // 如果有已完成的结果，显示在首页
+  var existingViewBtn = document.getElementById("view-result-btn");
+  if (saved && saved.result && !existingViewBtn) {
+    var viewBtn = document.createElement("button");
+    viewBtn.id = "view-result-btn";
+    viewBtn.className = "resume-btn";
+    viewBtn.textContent = "查看上次结果";
+    viewBtn.onclick = function() {
+      state.nickname = saved.nickname || "";
+      state.scores = calculateScores(saved.answers);
+      state.result = saved.result;
+      if (saved.nickname) document.getElementById("nickname-input").value = saved.nickname;
+      renderResult();
+      showPage("result");
+    };
+    btn.parentNode.insertBefore(viewBtn, btn.nextSibling);
+  }
+}
+
+// ============================================================
+//  工具函数
+// ============================================================
+function escapeHtml(str) {
+  var div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ============================================================
+//  粒子动画
+// ============================================================
+function initParticles() {
+  var canvas = document.getElementById("particles");
+  var ctx = canvas.getContext("2d");
+  var particles = [];
+  var w, h;
+  
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+  
+  var count = window.innerWidth < 768 ? 25 : 45;
+  for (var i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: -(Math.random() * 0.3 + 0.05),
+      alpha: Math.random() * 0.4 + 0.1,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pulse += 0.02;
+      
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+      
+      var a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(197,165,114," + a + ")";
+      ctx.fill();
+      
+      // 光晕
+      if (p.r > 0.8) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(197,165,114," + (a * 0.08) + ")";
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// ============================================================
+//  初始化
+// ============================================================
+function init() {
+  document.getElementById("access-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    submitAccessCode();
+  });
+  document.getElementById("start-btn").addEventListener("click", startTest);
+  document.getElementById("prev-btn").addEventListener("click", prevQuestion);
+  document.getElementById("close-modal-btn").addEventListener("click", closeShareCard);
+  document.getElementById("share-modal").querySelector(".modal-overlay").addEventListener("click", closeShareCard);
+  
+  // 回车提交昵称
+  document.getElementById("nickname-input").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") startTest();
+  });
+  
+  initParticles();
+  checkResume();
+  if (hasAccess()) {
+    showPage("cover");
+  } else {
+    showPage("access");
+    document.getElementById("access-code-input").focus();
+  }
+}
+
+// 启动
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+</script>
+
+
+</body></html>
