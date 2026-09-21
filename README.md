@@ -12,7 +12,7 @@
 
 ```js
 const ACCESS_CODES = [
-  "MAGIC0920"
+  "0943"
 ];
 ```
 
